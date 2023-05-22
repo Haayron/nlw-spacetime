@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    /* Preservar o tamanho da borda da caixa */
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 16px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #2C2C31;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #9e9ea0;
+}
+
+@keyframes entering {
+   from {
+    opacity: 0;
+    transform: translateY(-200px);
+   } to {
+    opacity: 1;
+    transform: translateY(0);
+   }
+}
+
+body {
+    background-color: #121215;
+    color: #EAEAEA;
+    font-family: 'Roboto', sans-serif;
+
+    /*Grid para dividir em linhas e colunas*/
+    display: grid;
+
+    /*1 coluna para cada*/
+    grid-template-areas: "profile timeline";
+
+    /*Tamanho de cada coluna*/
+    grid-template-columns: 1fr 1fr;
+
+    /*Tamanho da Linha*/
+    grid-template-rows: 100vh;
+}
+
+aside {
+    grid-area: profile;
+
+    background-image: url("./assets/background.svg");
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+
+    border-right: 1px solid;
+    border-image: linear-gradient(#727275, #2C2C31) 1;
+}
+
+/*Selecionando só os elementos do aside*/
+aside * {
+    animation: entering 1s ease-in-out;
+}
+
+
+/* selecionando a segunda imagem do aside */
+aside img:nth-child(2) {
+    width: 160px;
+    height: 160px;
+
+    border: 4px solid transparent;
+    background: linear-gradient(#D39E33, #ED5636, #633BBC) padding-box, linear-gradient(#D39E33, #ED5636, #633BBC) border-box;
+    border-radius: 50%;
+}
+
+aside p {
+    font-size: 2ren;
+    text-align: center;
+}
+
+aside span {
+    font-size: 0.75rem;
+    color: #9e9ea0
+}
+
+nav {
+    padding: 64px;
+    grid-area: timeline;
+
+    /*Quando o conteúdo não caber na vertical
+    Fixa o lado que não tem scroll*/
+    overflow-y: scroll;
+
+    animation: entering 1s ease-in-out;
+}
+
+.memory {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: #EAEAEA;
+    text-decoration: none;
+    margin-bottom: 64px;
+}
+
+.memory small{
+    color: #BEBEBF;
+    font-size: 0.75rem;
+}
+
+.memory h1{
+    font-size: 2rem;
+}
+
+.memory img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 8px;
+
+    /*efeito de transition suave no transform da img*/
+
+    transition: transform 0.3s ease-in-out;
+}
+
+/*tecnica para utilizar escala
+só que sem passar do tamanho da imagem*/
+.memory div {
+    width: 100%;
+    height: 280px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.memory:hover img {
+    transform: scale(1.1);
+    
+}
+
+.memory p {
+    font-size: 1,125rem;
+    color: #BEBEBF;
+    line-height: 28px;
+}
+
+@media(max-width: 768px) {
+    /*todas as fontes se ajustam ao font-size root*/
+    :root {
+        font-size: 14px;
+    }
+
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.2fr 0.8fr;
+        grid-template-areas: 
+        "profile"
+        "timeline";
+    }
+
+    aside {
+        border-right: none;
+        padding: 32px 12px;
+    }
+
+    nav {
+        overflow-y: visible;
+        padding: 25px;
+    }
+}
